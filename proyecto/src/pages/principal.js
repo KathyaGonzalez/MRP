@@ -5,7 +5,9 @@ export default function PrincipalFrom() {
     // Estados para almacenar los datos del formulario
   const [base, setBase] = useState('');
   const [requerimiento, setRequerimiento] = useState('');
-
+  const [verArbol, setVerArbol] = useState(false);
+  const [verTabla, setVerTabla] = useState(false);
+  
   //almacenar conjuntos
   const [datosAdd, setDatosAdd] = useState([]);
 
@@ -29,6 +31,8 @@ export default function PrincipalFrom() {
     setBase('');
     setRequerimiento('');
     setDatosAdd([]);
+    setVerArbol(true); 
+    setVerTabla(true); 
   };
 
   const AgregarDatos = () => {
@@ -132,6 +136,26 @@ export default function PrincipalFrom() {
           <button type="submit" className={styles.button}>
             Finalizar
           </button>
+          
+          {verArbol && (
+            <button
+              type="button"
+              onClick={() => console.log('Ver Árbol')}
+              className={`${styles.button} ${styles.buttonVerArbol}`}
+            >
+              Ver Árbol
+            </button>
+          )}
+
+          {verTabla && (
+            <button
+              type="button"
+              onClick={() => console.log('Ver Tabla')}
+              className={`${styles.button} ${styles.buttonVerTabla}`}
+            >
+              Ver Tabla
+            </button>
+          )}
         </div>
       </form>
     </div>

@@ -74,6 +74,7 @@
 
 .buttonContainer {
   display: flex;
+  flex-direction: column;
   gap: 10px; /* Espacio entre los botones */
 }
 
@@ -86,4 +87,9 @@
   border: none;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.buttonVerArbol,
+.buttonVerTabla {
+  width: 100%;
 }
