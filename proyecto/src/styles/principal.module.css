@@ -1,0 +1,89 @@
+.layout {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.labeLayout {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff; /* Set the text color to white */
+  text-transform: uppercase;
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.container {
+  margin: 2%;
+  border-color: black;
+  border-radius: 0.5%;
+  border: 10px;
+  color: aliceblue;
+  background-color: #0C356A;
+  padding: 1px 0px;
+  line-height: 40px;
+}
+
+.group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.fieldGroup {
+  flex: 1;
+  margin-right: 10px; /* Adjust the spacing between fields */
+}
+
+/* Add the following style to ensure labels appear above their corresponding inputs */
+.fieldGroup label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form{
+  max-width: 500px;
+  margin: auto;
+}
+  
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Permite que los elementos se muestren en varias líneas */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.label, 
+.field {
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+.label {
+  text-align: left;
+}
+
+.field {
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}
+
+.button {
+  flex: 1; 
+  width: 100%;
+  padding: 10px;
+  background: #0EA293;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
