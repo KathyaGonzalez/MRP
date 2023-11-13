@@ -1,4 +1,3 @@
-import { useState } from "react"
 import dynamic from "next/dynamic"
 import styles from '@/styles/custom-tree.module.css'
 import { useCenteredTree } from "./helpers"
@@ -8,38 +7,14 @@ const Tree = dynamic(() => import("react-d3-tree"), {
 }
 )
 
-export default function arbol() {
-    // Estructura de datos
-    const [tree, setTree] = useState({
-        name: 'Root',
-        children: [
-            {
-                name: 'Child 1',
-                children: [
-                    {
-                        name: 'Child 3'
-                    },
-                    {
-                        name: 'Child 2',
-                        children: [
-                            {
-                                name: 'Child 5'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: 'Child 3'
-            }
-        ],
-    })
+export default function Arbol(props) {
+    const { data } = props;
     const [translate, containerRef] = useCenteredTree();
 
     return (
         <div className={styles.container} ref={containerRef}>
             <Tree
-                data={tree} orientation="vertical"
+                data={data} orientation="vertical"
                 rootNodeClassName={styles.node__root}
                 branchNodeClassName={styles.node__branch}
                 leafNodeClassName={styles.node__leaf}
