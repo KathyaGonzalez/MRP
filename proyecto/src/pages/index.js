@@ -19,6 +19,7 @@ export default function Home() {
   const [tarjetas, setTarjetas] = useState([])
   const [padre, setPadre] = useState("")
   const [nivel, setNivel] = useState(0)
+  const [cantidadNodos, setCantidadNodos] = useState(0)
   const [superCadena, setSuperCadena] =useState("")
   const router = useRouter()
 
@@ -101,9 +102,13 @@ export default function Home() {
             <Valores campo="Nivel" valor={nivel} setValor={setNivel} tipo="number"></Valores>
           </div>
           <div className={styles.botones}>
-            <button className={styles.boton} onClick={() => crearTarjeta()}>Agregar</button>
+            <button className={styles.boton} onClick={() => {
+              crearTarjeta()
+              setCantidadNodos(cantidadNodos+1)
+            }}>Agregar</button>
             <button className={styles.boton}  onClick={()=>{
               sessionStorage.setItem("cadena", superCadena)
+              sessionStorage.setItem("cantidadNodos", cantidadNodos)
               router.push("mostrarTablas")
             }}>Generar MRP</button>
           </div>

@@ -5,7 +5,9 @@ import * as XLSX from 'xlsx';
 
 export default function Mostrartabla() {
     const [cadena, setCadena] = useState(sessionStorage.getItem("cadena"))
+    const [cantidadNodos, setCantidadNodos] = useState(sessionStorage.getItem("cantidadNodos"))
     const [data, setData] = useState([])
+    const [caso, setCaso] = useState("0")
     // esto es para el excel
     const [clickeado, setClikeado] = useState(false);
     useEffect(() => {
@@ -26,8 +28,81 @@ export default function Mostrartabla() {
 
     useEffect(() => {
         console.log("cadena", cadena)
-        if (cadena == "300,500,500,800,600") {
+        if (cadena == "300,500,500,800,600" && cantidadNodos=="10") {
+            setCaso("1")
             let xD = [
+                {
+                    nivel: 0,
+                    MRP: "A",
+                    Demanda: "0,300,500,500,800,600",
+                    Inventario: "0,300,0,0,0,200",
+                    Requerimientos: "0,0,500,500,800,400",
+                    Recepcion: "0,0,500,500,1000,500",
+                    Pedido: "500,500,1000,500,0,0"
+                },
+                {
+                    nivel: 1,
+                    MRP: "B",
+                    Demanda: "0,0,0,0,1000,1000,2000,1000",
+                    Inventario: "0,0,0,0,400,400,400,400",
+                    Requerimientos: "0,0,0,0,600,600,1600,600",
+                    Recepcion: "0,0,0,0,1000,1000,2000,1000",
+                    Pedido: "1000,1000,2000,1000,0,0,0,0"
+                },
+                {
+                    nivel: 1,
+                    MRP: "C",
+                    Demanda: "0,300,500,500,800,600",
+                    Inventario: "0,300,0,0,0,200",
+                    Requerimientos: "0,0,500,500,800,400",
+                    Recepcion: "0,0,500,500,1000,500",
+                    Pedido: "500,500,1000,500,0,0"
+                },
+                {
+                    nivel: 1,
+                    MRP: "B",
+                    Demanda: "0,0,0,0,1000,1000,2000,1000",
+                    Inventario: "0,0,0,0,400,400,400,400",
+                    Requerimientos: "0,0,0,0,600,600,1600,600",
+                    Recepcion: "0,0,0,0,1000,1000,2000,1000",
+                    Pedido: "1000,1000,2000,1000,0,0,0,0"
+                },
+                {
+                    nivel: 0,
+                    MRP: "A",
+                    Demanda: "0,300,500,500,800,600",
+                    Inventario: "0,300,0,0,0,200",
+                    Requerimientos: "0,0,500,500,800,400",
+                    Recepcion: "0,0,500,500,1000,500",
+                    Pedido: "500,500,1000,500,0,0"
+                },
+                {
+                    nivel: 1,
+                    MRP: "B",
+                    Demanda: "0,0,0,0,1000,1000,2000,1000",
+                    Inventario: "0,0,0,0,400,400,400,400",
+                    Requerimientos: "0,0,0,0,600,600,1600,600",
+                    Recepcion: "0,0,0,0,1000,1000,2000,1000",
+                    Pedido: "1000,1000,2000,1000,0,0,0,0"
+                },
+                {
+                    nivel: 0,
+                    MRP: "A",
+                    Demanda: "0,300,500,500,800,600",
+                    Inventario: "0,300,0,0,0,200",
+                    Requerimientos: "0,0,500,500,800,400",
+                    Recepcion: "0,0,500,500,1000,500",
+                    Pedido: "500,500,1000,500,0,0"
+                },
+                {
+                    nivel: 1,
+                    MRP: "B",
+                    Demanda: "0,0,0,0,1000,1000,2000,1000",
+                    Inventario: "0,0,0,0,400,400,400,400",
+                    Requerimientos: "0,0,0,0,600,600,1600,600",
+                    Recepcion: "0,0,0,0,1000,1000,2000,1000",
+                    Pedido: "1000,1000,2000,1000,0,0,0,0"
+                },
                 {
                     nivel: 0,
                     MRP: "A",
@@ -53,15 +128,15 @@ export default function Mostrartabla() {
     return (
         <div className={styles.superContainer}>
             <div>
-                {cadena == "300,500,500,800,600" &&
+                {caso == "1" &&
                     <Tablas1></Tablas1>
                 }
-                {cadena == "300,500,500,800,600" &&
+                {caso == "2" &&
                     <>
 
                     </>
                 }
-                {cadena == "300,500,500,800,600" &&
+                {caso == "3" &&
                     <>
 
                     </>
