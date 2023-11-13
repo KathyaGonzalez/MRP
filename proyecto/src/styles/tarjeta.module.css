@@ -1,0 +1,13 @@
+.SuperContainer{
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    margin-top: 10px;
+}
+.container{
+    background-color: #144071;
+}
+.campo{
+    background-color: #f1cb2e;
+    font-style: italic;
+}

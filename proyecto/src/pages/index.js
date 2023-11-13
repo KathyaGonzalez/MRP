@@ -2,10 +2,79 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useState } from 'react'
+import Valores from './components/valores'
+import Tarjeta from './components/tarjeta'
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [cadena, setCadena] = useState("")
+  const [q, setQ] = useState("")
+  const [MRP, setMRP] = useState("")
+  const [TS, setTS] = useState("")
+  const [INV, setINV] = useState("")
+  const [STOCK, setSTOCK] = useState("")
+  const [tarjetas, setTarjetas] = useState([])
+  const [padre, setPadre] = useState("")
+  const [nivel, setNivel] = useState(0)
+  const [superCadena, setSuperCadena] =useState("")
+  const router = useRouter()
+
+  const crearTarjeta = () => {
+    if (nivel == 0) {
+      if (q != "" && cadena != "" && MRP != "" && TS != "" && INV != "" && STOCK != "") {
+        setSuperCadena(cadena)
+        const arrayNumerico = cadena.split(',').map(numero => parseFloat(numero));
+        const tarjeta = {
+          demanda: arrayNumerico,
+          DM: cadena,
+          nivel,
+          q,
+          MRP,
+          TS,
+          INV,
+          STOCK
+        }
+        setTarjetas([...tarjetas, tarjeta]);
+        setCadena("")
+        setQ("")
+        setMRP("")
+        setTS("")
+        setINV("")
+        setSTOCK("")
+        setPadre("")
+      }
+    } else {
+      if (q != "" && MRP != "" && TS != "" && INV != "" && STOCK != "") {
+        const arrayNumerico = cadena.split(',').map(numero => parseFloat(numero));
+        const tarjeta = {
+          demanda: arrayNumerico,
+          DM: cadena,
+          nivel,
+          q,
+          MRP,
+          TS,
+          INV,
+          STOCK,
+          padre,
+          nivel
+        }
+        setTarjetas([...tarjetas, tarjeta]);
+        setCadena("")
+        setQ("")
+        setMRP("")
+        setTS("")
+        setINV("")
+        setSTOCK("")
+        setPadre("")
+      }
+    }
+
+
+  }
+
   return (
     <>
       <Head>
@@ -14,101 +83,52 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+      <div className={styles.superContainer}>
+        <div className={styles.containerInfo}>
+          <div className={styles.containerDemanda}>
+            <div className={styles.demanda}>
+              Demanda
+            </div>
+            <input className={styles.demandaInput} type="text" onChange={(evt) => setCadena(evt.target.value)} value={cadena}></input>
+          </div>
+          <div className={styles.containerValues}>
+            <Valores campo="MRP" valor={MRP} setValor={setMRP} tipo="text"></Valores>
+            <Valores campo="TS" valor={TS} setValor={setTS} tipo="number"></Valores>
+            <Valores campo="Q" valor={q} setValor={setQ} tipo="number"></Valores>
+            <Valores campo="INV" valor={INV} setValor={setINV} tipo="number"></Valores>
+            <Valores campo="STOCK" valor={STOCK} setValor={setSTOCK} tipo="number"></Valores>
+            <Valores campo="Padre" valor={padre} setValor={setPadre} tipo="text"></Valores>
+            <Valores campo="Nivel" valor={nivel} setValor={setNivel} tipo="number"></Valores>
+          </div>
+          <div className={styles.botones}>
+            <button className={styles.boton} onClick={() => crearTarjeta()}>Agregar</button>
+            <button className={styles.boton}  onClick={()=>{
+              sessionStorage.setItem("cadena", superCadena)
+              router.push("mostrarTablas")
+            }}>Generar MRP</button>
           </div>
         </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+        <div className={styles.containerTarjetas}>
+          {tarjetas.map((item) => {
+            return (
+              <Tarjeta
+                MRP={item.MRP} 
+                Q={item.q} 
+                TS={item.TS} 
+                INV={item.INV} 
+                STOCK={item.STOCK} 
+                DEMANDA={item.demanda} 
+                cadena={item.DM} 
+                setPadre={setPadre}
+                padre={item.padre}
+                nivel={item.nivel}
+                setNivel={setNivel}
+              >
+              </Tarjeta>
+            )
+          })}
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+      </div>
     </>
   )
 }
