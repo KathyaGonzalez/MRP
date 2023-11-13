@@ -1,0 +1,25 @@
+.superContainer{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    column-gap: 10px;
+  }
+  
+.boton {
+    background-color: #f1cb2e;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    box-shadow: none;
+    padding: 0;
+    font-size: medium;
+    height: 80px;
+    width: 100px;
+    margin-top: 20px;
+  }
+  
+  .boton:hover {
+    background-color: #144071;
+    color: white;
+    box-shadow: 10px 10px lightblue;
+    cursor: pointer;
+  }
